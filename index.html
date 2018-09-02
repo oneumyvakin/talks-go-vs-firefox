@@ -1,0 +1,402 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Суслик, TLS и лиса-параноик</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/serif.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<img style="border: none" src="img/gopher.png" /> <!-- REPLACE -->
+				</section>
+				
+				<section>
+					<h2>Суслик, TLS<br> и лиса-параноик</h2>
+					
+					<br>
+					
+					<small style="text-align: center;">
+						Олег Неумывакин<br>
+						тестировщик @ Plesk<br>
+						oneumyvakin@gmail.com<br>
+					</small>
+				</section>
+				
+				<section>					
+					<img style="border: none" src="img/qr_go_vs_firefox.png" />					
+				</section>
+				
+				<section>
+					<h2>О себе</h2>
+					<br>
+					<p style="text-align: left;">
+					- 10+ лет тестирования<br>
+					- Plesk -> Yandex -> Plesk
+					</p>
+				</section>
+				
+				<section>
+					<h3 style="text-align: left;">Тестирование энергопотребления браузера</h3>
+					<p style="text-align: left;">					
+						<span class="fragment">- берем ноутбук<br><span>
+						<span class="fragment">- отключаем от сети<br><span>
+						<span class="fragment">- выполняем нагрузку в цикле<br><span>				
+						<span class="fragment">- ждем разряда батареи<br><span>	
+						<span class="fragment">- записываем время<br><span>
+					</p>					
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section  data-background-video="img/opera.webm" data-background-video-loop="loop">
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				
+				<section>
+					<h3 style="text-align: left;">Участники тестирования</h3>
+					<p style="text-align: left;">					
+						<span class="fragment">- Chrome<br><span>
+						<span class="fragment">- Яндекс.Браузер<br><span>
+					</p>					
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section>
+					<h3 style="text-align: left;">Тестирование энергопотребления</h3>
+					<p style="text-align: left;">					
+						- берем ноутбук<br>
+						- отключаем от сети<br>
+						- выполняем нагрузку<br>				
+						- <b>ждём разряда батареи <em><--- 6 часов</em></b><br>	
+						- записываем время<br>
+					</p>					
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				<section>
+					<h3 style="text-align: left;">WebPageReplay</h3>
+					
+					<img height="" style="border: none" src="img/wpr.png" />				
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section>
+					<h3 style="text-align: left;">WebPageReplay: архив</h3>
+					<pre><code class="hljs stretch" data-trim contenteditable>
+{
+	"vk.com": {
+		"/search": "..."
+	},
+	"google.com": {
+		"/search?q=qwe": "..."
+	}
+}
+					</code></pre>
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section>
+				    <h3 style="text-align: left;">WebPageReplay: TLS</h3>
+					<p style="text-align: left;">					
+						--ignore-certificate-errors-spki-list=&lt;base64 subject&gt;<br>
+					</p>
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section>
+					<h3 style="text-align: left;">Изменение требований</h3>
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section>
+					<h3 style="text-align: left;">Участники тестирования</h3>
+					<p style="text-align: left;">					
+						- Chrome<br>
+						- Яндекс.Браузер<br>
+						<span class="fragment">- Opera<br><span>
+						<span class="fragment">- Firefox<br><span>
+					</p>					
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				
+				
+				<section data-background-video="img/panic.mp4" data-background-video-loop="loop">
+					
+					
+					<aside class="notes">У НАС НЕБОЛЬШАЯ ПАНИКА<br>						
+					</aside>
+				</section>
+				
+				<section>
+					<h3 style="text-align: left;">Проблема</h3>
+					
+					- Firefox не поддерживает --ignore-certificate-errors-spki-list<br>
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section>
+					<h3 style="text-align: left;">Firefox</h3>
+					<p style="text-align: left;">
+					- установим сертификат в хранилище Firefox'a<br>
+					</p>
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<!-- DONT WORK AFTER GENERATION ON THE FLY -->
+				<section data-background="img/fox-smile-0.jpg">
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>				
+				
+				<section>
+					<h3 style="text-align: left;">Firefox</h3>
+					
+					<p style="text-align: left;">
+					SSL_ERROR_BAD_CERT_DOMAIN<br>
+					</p>
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>				
+								
+				
+				<section>
+					<h3 style="text-align: left;">Решение №1</h3>
+					<p style="text-align: left;">
+					- генерируем сертификаты и ключи на лету
+					</p>
+					<pre><code class="hljs stretch" data-trim contenteditable>
+http.Server{
+    Addr:      ":443",
+    TLSConfig: tlsconfig,
+}
+					</code></pre>
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				
+				<section>
+					<h3 style="text-align: left;">Решение №1</h3>
+					<p style="text-align: left;">
+					- генерируем сертификаты и ключи на лету
+					</p>
+					<pre><code class="hljs stretch" data-trim contenteditable>
+tls.Config{
+    Certificates: []tls.Certificate{
+        tls.Certificate{
+            Certificate: [][]byte{certBytes},
+            PrivateKey:  privateKey,
+        }
+    },
+}
+					</code></pre>
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				
+				<!-- DONT WORK AFTER FIX -->
+				<section data-background="img/fox-smile-2.jpg">
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section>
+					<h3 style="text-align: left;">Firefox</h3>
+					
+					SEC_ERROR_INADEQUATE_CERT_TYPE<br>
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+								
+				<section>
+					<h3 style="text-align: left;">"Неправильный" тип</h3>
+					<pre><code class="hljs stretch" data-trim contenteditable>
+x509.Certificate{
+    ...
+    // Enchanced/Extended Key Usage: Any Purpose 
+    ExtKeyUsage:  []x509.ExtKeyUsage{x509.ExtKeyUsageAny},
+    ...
+}
+					</code></pre>
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section>
+					<h3 style="text-align: left;">"Неправильный" тип: решение</h3>
+					<pre><code class="hljs stretch" data-trim contenteditable>
+x509.Certificate{
+    ...
+    // Enchanced Key Usage: SSL/TLS Web Server Authentication 
+    ExtKeyUsage:  []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth},
+    ...
+}
+					</code></pre>
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				
+				<!-- DONT WORK AFTER FIX -->
+				<section data-background="img/fox-smile-1.jpg">
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				
+				<section>
+					<h3 style="text-align: left;">Firefox</h3>
+					
+					SEC_ERROR_REUSED_ISSUER_AND_SERIAL<br>
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section>
+					<h3 style="text-align: left;">Проблема в Решении №1</h3>
+					<pre><code class="hljs stretch" data-trim contenteditable>
+x509.Certificate{
+    ...
+    SerialNumber: big.NewInt(int64(1)),
+    ...
+}
+					</code></pre>
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section>
+					<h3 style="text-align: left;">Решение №2</h3>
+					<p style="text-align: left;">
+					- пре-генерируем все сертификаты/ключи заранее в виде файлов<br>
+					- храним SerialNumber персистентно<br>
+					- кэшируем, чтобы не ходить на диск<br>
+					</p>
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				
+				<section data-background="img/fox-happy.jpg">
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section>					
+					<a href="https://www.ixbt.com/portopc/battery-life-browsers-test-part-1.html" target="_blank">
+						<img style="border: none" src="img/ixbt-article.png">
+					</a>
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section>					
+					<h3 style="text-align: left;">Конец</h3>
+					
+					<br>
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section>					
+					<h3 style="text-align: left;">Выводы</h3>
+					
+					<p style="text-align: left;">
+					- Chromium - кастомизируем<br>
+					- Firefox  - параноик<br>
+					- Go - неожиданно прост<br>
+					</p>
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				
+				<section>
+					<h3 style="text-align: left;">Вопросы?</h3>
+				</section>
+						
+				
+				<section>
+					<h3 style="text-align: left;">Вопросы?</h3>	
+					<p style="text-align: left;">
+						- <a href="https://bit.ly/qa_siberia" target="_blank">t.me/qa_siberia</a>
+					</p>
+					<img style="border: none" src="img/qr_qa_siberia.png" />			
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/highlight/go.min.js', async: true  }
+				]
+			});
+		</script>		
+		
+	</body>
+</html>
