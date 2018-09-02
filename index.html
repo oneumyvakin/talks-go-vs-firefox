@@ -197,7 +197,7 @@
 					
 					<aside class="notes"><br>						
 					</aside>
-				</section>				
+				</section>								
 								
 				
 				<section>
@@ -214,7 +214,27 @@ http.Server{
 					<aside class="notes"><br>						
 					</aside>
 				</section>
+								
+								
 				
+				<section>
+					<h3 style="text-align: left;">Решение №1</h3>
+					<p style="text-align: left;">
+					- генерируем сертификаты и ключи на лету
+					</p>
+					<pre><code class="hljs stretch" style="width: 900px;" data-trim contenteditable>
+http.Server{
+    Addr:      ":443",
+    TLSConfig: tls.Config {
+        ...
+        GetConfigForClient: func(*ClientHelloInfo) (*Config, error)
+        ...
+    },
+}
+					</code></pre>
+					<aside class="notes"><br>						
+					</aside>
+				</section>
 				
 				<section>
 					<h3 style="text-align: left;">Решение №1</h3>
@@ -306,7 +326,7 @@ x509.Certificate{
 					<pre><code class="hljs stretch" data-trim contenteditable>
 x509.Certificate{
     ...
-    SerialNumber: big.NewInt(int64(1)),
+    SerialNumber: 1,
     ...
 }
 					</code></pre>
@@ -321,6 +341,16 @@ x509.Certificate{
 					- пре-генерируем все сертификаты/ключи заранее в виде файлов<br>
 					- храним SerialNumber персистентно<br>
 					- кэшируем, чтобы не ходить на диск<br>
+					</p>
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section>
+					<h3 style="text-align: left;">Решение №3</h3>
+					<p style="text-align: left;">
+					- один сертификат/ключ с одним SerialNumber<br>
+					- все доменные имена добавим в Subject Alt Names<br>
 					</p>
 					<aside class="notes"><br>						
 					</aside>
