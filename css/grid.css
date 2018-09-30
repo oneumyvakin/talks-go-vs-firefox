@@ -5,9 +5,9 @@
 }
 .gridone {
   grid-column: 1 / 3;
-  grid-row: 1 / 3;
+  grid-row: 1 / 6;
 }
-.gridtwo { 
+.gridtwo {
   grid-column: 2 / 3;
-  grid-row: 1 / 3;
+  grid-row: 1 / 6;
 }
