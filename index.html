@@ -26,7 +26,7 @@
 		<div class="reveal">
 			<div class="slides">
 				<section>
-					<img style="border: none" src="img/gopher.png" /> <!-- REPLACE -->
+					<img style="border: none; box-shadow: none" src="img/gopher.png" /> <!-- REPLACE -->
 				</section>
 				
 				<section>
@@ -39,6 +39,10 @@
 						тестировщик @ Plesk<br>
 						oneumyvakin@gmail.com<br>
 					</small>
+					<aside class="notes">
+					ЗАЧЕМ: интересно, находить выход из технической проблемы<br>
+					расширить ваш инструментарий<br>						
+					</aside>
 				</section>
 				
 				<section>					
@@ -52,6 +56,14 @@
 					- 10+ лет тестирования<br>
 					- Plesk > Yandex > Plesk
 					</p>
+				</section>
+				
+				<section>
+					<h3 style="text-align: left;">Энергосбережение в браузере</h3>
+					<img style="border: none" src="img/yabro-energy.png" /> 			
+					
+					<aside class="notes"><br>						
+					</aside>
 				</section>
 				
 				<section>
@@ -76,7 +88,7 @@
 				
 				
 				<section>
-					<h3 style="text-align: left;">Участники тестирования</h3>
+					<h3 style="text-align: left;">Участники тестирования из требований PM'a</h3>
 					<p style="text-align: left;">					
 						<span class="fragment">- Chrome<br><span>
 						<span class="fragment">- Яндекс.Браузер<br><span>
@@ -166,8 +178,48 @@
 				
 				<section>
 					<h3 style="text-align: left;">Проблема</h3>
+				
+					<p style="text-align: left;"><b>--ignore-certificate-errors-spki-list</b></p>
+					<table>
+						<thead>
+							<tr>
+								<td>Браузер</td>
+								<td>Поддержка</td>
+							</tr>
+						</thead>
 					
-					- Firefox не поддерживает --ignore-certificate-errors-spki-list<br>
+						<tr>
+							<td>Chrome</td>
+							<td style="text-align: center">
+								<img style="border: none; box-shadow: none" height="32x" width="32px" src="img/yes.png">
+							</td>
+						</tr>
+						<tr>
+							<td>Я.Браузер</td>
+							<td style="text-align: center">
+								<img style="border: none; box-shadow: none" height="32x" width="32px" src="img/yes.png">
+							</td>
+						</tr>
+						<tr>
+							<td>Opera</td>
+							<td style="text-align: center">
+								<img style="border: none; box-shadow: none" height="32x" width="32px" src="img/yes.png">
+							</td>
+						</tr>
+						<tr>
+							<td>Firefox</td>
+							<td style="text-align: center">
+								<img style="border: none; box-shadow: none" height="32x" width="32px" src="img/no.png">
+							</td>
+						</tr>
+					</table>
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section>
+					<h3 style="text-align: left;">Нам срочно нужно другое решение!</h3>
 					
 					<aside class="notes"><br>						
 					</aside>
@@ -198,8 +250,31 @@
 					
 					<aside class="notes"><br>						
 					</aside>
-				</section>								
-								
+				</section>
+				
+				<section>
+					<h3 style="text-align: left;">Решение №1</h3>
+					<p style="text-align: left;">
+					- генерируем сертификаты и ключи на лету
+					</p>
+					<pre><code class="hljs stretch" data-trim contenteditable>
+x509.Certificate {		
+	NotBefore:    time.Now(),
+	NotAfter:     time.Now().Add(365 * 24 * time.Hour),
+
+	SerialNumber: 1,
+	Issuer:       caCrt.Subject,
+
+	Subject:      csr.Subject,
+	DNSNames:     csr.DNSNames,
+
+	KeyUsage:     x509.KeyUsageDigitalSignature,
+	ExtKeyUsage:  []x509.ExtKeyUsage{x509.ExtKeyUsageAny},
+}
+					</code></pre>
+					<aside class="notes"><br>						
+					</aside>
+				</section>
 				
 				<section>
 					<h3 style="text-align: left;">Решение №1</h3>
@@ -215,8 +290,6 @@ http.Server{
 					<aside class="notes"><br>						
 					</aside>
 				</section>
-								
-								
 				
 				<section>
 					<h3 style="text-align: left;">Решение №1</h3>
@@ -256,6 +329,11 @@ tls.Config{
 					</aside>
 				</section>
 				
+				<section data-background="img/chrome.jpg">
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>				
 				
 				<!-- DONT WORK AFTER FIX -->
 				<section data-background="img/fox-smile-2.jpg">
@@ -279,7 +357,7 @@ tls.Config{
 					<pre><code class="hljs stretch" data-trim contenteditable>
 x509.Certificate{
     ...
-    // Enchanced/Extended Key Usage: Any Purpose 
+    // Key Usage: Any Purpose 
     ExtKeyUsage:  []x509.ExtKeyUsage{x509.ExtKeyUsageAny},
     ...
 }
@@ -294,7 +372,7 @@ x509.Certificate{
 					<pre><code class="hljs stretch" data-trim contenteditable>
 x509.Certificate{
     ...
-    // Enchanced Key Usage: SSL/TLS Web Server Authentication 
+    // Key Usage: SSL/TLS Web Server Authentication 
     ExtKeyUsage:  []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth},
     ...
 }
@@ -304,6 +382,12 @@ x509.Certificate{
 					</aside>
 				</section>
 				
+				
+				<section data-background="img/chrome.jpg">
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
 				
 				<!-- DONT WORK AFTER FIX -->
 				<section data-background="img/fox-smile-1.jpg">
@@ -355,8 +439,7 @@ x509.Certificate{
 					</p>
 					<aside class="notes"><br>						
 					</aside>
-				</section>
-				
+				</section>				
 				
 				<section data-background="img/fox-happy.jpg">
 					
@@ -374,7 +457,7 @@ x509.Certificate{
 				</section>
 				
 				<section>					
-					<h3 style="text-align: left;">Конец</h3>
+					<h3 style="text-align: left;">И все счастливы!</h3>
 					
 					<br>
 					
@@ -388,17 +471,17 @@ x509.Certificate{
 					<p style="text-align: left;">
 					- Chromium - кастомизируем<br>
 					- Firefox  - параноик<br>
-					- Go - неожиданно прост<br>
+					- Go - неожиданно прост:<br>
+					--  проще чем решать проблемы браузеров<br>
+					--  просто встроиться в существующий код<br>
 					</p>
 					<aside class="notes"><br>						
 					</aside>
 				</section>
-				
-				
+								
 				<section>
 					<h3 style="text-align: left;">Вопросы?</h3>
-				</section>
-						
+				</section>						
 				
 				<section>
 					<h3 style="text-align: left;">Вопросы?</h3>	
