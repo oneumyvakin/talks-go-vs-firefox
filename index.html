@@ -46,7 +46,7 @@
 				</section>
 				
 				<section>					
-					<img style="border: none" src="img/qr_go_vs_firefox.png" />					
+					<img style="border: none" src="img/qr_go_vs_firefox.png" />
 				</section>
 				
 				<section>
@@ -54,6 +54,7 @@
 					<br>
 					<p style="text-align: left;">
 					- 10+ лет тестирования<br>
+					- карьерные консультации для тестировщиков<br>
 					- Plesk > Yandex > Plesk
 					</p>
 				</section>
@@ -89,9 +90,9 @@
 				
 				<section>
 					<h3 style="text-align: left;">Участники тестирования из требований PM'a</h3>
-					<p style="text-align: left;">					
+					<p style="text-align: left;">
+						<span class="fragment">- Яндекс.Браузер<br><span>					
 						<span class="fragment">- Chrome<br><span>
-						<span class="fragment">- Яндекс.Браузер<br><span>
 					</p>					
 					
 					<aside class="notes"><br>						
@@ -112,7 +113,7 @@
 					</aside>
 				</section>
 				<section>
-					<h3 style="text-align: left;">WebPageReplay</h3>
+					<h3 style="text-align: left;">На сцене появляется суслик: WebPageReplay</h3>
 					
 					<img height="" style="border: none" src="img/wpr.png" />				
 					
@@ -132,6 +133,16 @@
 	}
 }
 					</code></pre>
+					
+					<aside class="notes"><br>						
+					</aside>
+				</section>
+				
+				<section>
+				    <h3 style="text-align: left;">WebPageReplay: перенаправление запросов</h3>
+					<p style="text-align: left;">					
+						--host-resolver-rules="MAP *:80 127.0.0.1:8080,MAP *:443 127.0.0.1:8081,EXCLUDE localhost"<br>
+					</p>
 					
 					<aside class="notes"><br>						
 					</aside>
@@ -169,22 +180,20 @@
 				
 				<section>
 					<h3 style="text-align: left;">Участники тестирования</h3>
-					<p style="text-align: left;">					
+					<p style="text-align: left;">
+						- Яндекс.Браузер<br>					
 						- Chrome<br>
-						- Яндекс.Браузер<br>
 						<span class="fragment">- Opera<br><span>
 						<span class="fragment">- Firefox<br><span>
+						<span class="fragment">- сделать решение коробочным<br><span>
+						<span class="fragment">и все это за неделю<br><span>
 					</p>					
 					
 					<aside class="notes"><br>						
 					</aside>
 				</section>
 				
-				
-				
 				<section data-background-video="img/panic.mp4" data-background-video-loop="loop">
-					
-					
 					<aside class="notes">У НАС НЕБОЛЬШАЯ ПАНИКА<br>						
 					</aside>
 				</section>
@@ -492,7 +501,8 @@ x509.Certificate{
 					--  проще чем решать проблемы браузеров<br>
 					--  просто встроиться в существующий код<br>
 					</p>
-					<aside class="notes"><br>						
+					<aside class="notes">
+						8000(py) vs 3000(Go) LoC<br>				
 					</aside>
 				</section>
 								
